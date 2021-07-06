@@ -1,29 +1,45 @@
+const choices = ["rock", "paper", "scissors"];
+//Computer Play function
 function computerPlay() {
-  let randMove = ["rock", "paper", "scissors"];
-  let random = randMove[Math.floor(Math.random(randMove) * 3)];
-  return random;
+  let randomChoice = Math.floor(Math.random() * 3);
+  let computerChoice = choices[randomChoice];
+  return computerChoice;
 }
 
-function playRound(playerSelection, computerSelection) {
-  if(playerSelection === computerSelection) {
-    return "It's a Draw!";
-  } else if(playerSelection === "rock" && computerSelection === "paper") {
-    return "Computer Wins";
-  } else if(playerSelection === "rock" && computerSelection === "scissors"){
-    return "Player Wins";
-  } else if(playerSelection === "paper" && computerSelection === "rock") {
-    return "Player Wind";
-  } else if(playerSelection === "paper" && computerSelection === "scissors") {
-    return "Compter Wins";
-  } else if(playerSelection === "scissors" && computerSelection === "rock") {
-    return "Computer Wins";
-  } else if(playerSelection === "scissors" && computerSelection === "paper") {
-    return "Player Wins";
+//Game function to play 5 times
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  for(let i = 0; i < 5; i++) {
+    const playerInput = prompt("Enter Your choice: Rock, Paper or Scissors?");
+    const playerSelection = playerInput.toLowerCase();
+    const computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+    function playRound(playerChoice, computerChoice) {
+      if(playerChoice==="rock" && computerChoice === "rock" 
+      || playerChoice === "paper" && computerChoice === "paper" 
+      || playerChoice === "scissors" && computerChoice === "scissors") {
+         
+      } else if(playerChoice==="rock" && computerChoice === "paper") {
+         computerScore++; 
+      } else if(playerChoice==="rock" && computerChoice === "scissors") {
+        playerScore++;
+      } else if(playerChoice==="paper" && computerChoice === "rock") {
+        playerScore++;
+      } else if(playerChoice==="paper" && computerChoice === "scissors") {
+        computerScore++;
+      } else if(playerChoice==="scissors" && computerChoice === "rock") {
+        computerScore++;
+      } else if(playerChoice==="scissors" && computerChoice === "paper") {
+        playerScore++;
+      }
+    }
+  }
+  if(playerScore === computerScore) {
+    return "It's a Draw";
+  } else if(playerScore > computerScore){
+    return "You Won";
+  } else {
+    return "Computer Won";
   }
 }
-
-let inputUser = prompt("Enter Your choice: ");
-let playerSelection = inputUser.toLowerCase();
-let computerSelection = computerPlay();
-
-console.log(playRound(playerSelection, computerSelection));
